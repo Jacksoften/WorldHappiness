@@ -62,5 +62,44 @@ regionOnly.model = aov(score~Region, data=happiness.all)
 regionOnly.tukey = TukeyHSD(regionOnly.model)
 # We can see if the difference between any pair of regions is statistically significant.
 
+# data modification
+# since there is no significant effect of year, we can combine three tables together
+# for later work for simplicity
+# we drop measure of error variation since they are not standard for different years
+variation.names = c("Standard.Error", "Lower.Confidence.Interval", "Upper.Confidence.Interval", 
+					"Whisker.high", "Whisker.low")
+data1new = data1[, !names(data1) %in% variation.names]
+data2new = data2[, !names(data2) %in% variation.names]
+data3new = data3[, !names(data3) %in% variation.names]
+full.table = rbind(data1new, data2new, data3new)
+# select only region factor and six target factors
+selected.table = full.table[,c(2,4,5,6,7,8,9,10)]
+# Rename columns for simplification
+names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
+p8 = pairs(selected.table)
 
 # ------------------------linear regression---------------------------------
+# Question: Should I start with multivariate linear regression or ANCOVA
+
+# model selection
+# 1. backward
+full.model = lm(Score~Economy+Family+Health+Freedom+Trust+Generosity, data=selected.table)
+drop1(full.model)
+# AIC values show that we should not drop any vairable
+
+# 2. Manually, in the plot, we can see that there is the least linear relationship
+#    between Score and Generosity, let us see if we can drop it.
+reduced.model.no.generosity = lm(Score~Economy+Family+Health+Freedom+Trust, data=selected.table)
+cat("full model, AIC: ", AIC(full.model), " BIC: ", BIC(full.model), "\n")
+cat("reduced model, AIC: ", AIC(reduced.model.no.generosity), " BIC: ", BIC(reduced.model.no.generosity), "\n")
+# AIC shows that we do not drop it, BIC shows we do need to drop it
+# NOTE: - consider use transformation on generosity
+#       - we might also consider transformation on trust since there is some non-linear
+#         relationship between trust an score
+
+# A TRY
+# we can fit a model with six vairables and region factor at the same time
+full.model.plus = aov(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
+
+cat("full model plut, AIC: ", AIC(full.model.plus), " BIC: ", BIC(full.model.plus), "\n")
+# The value of AIC dramatically droped, but BIC increased.
