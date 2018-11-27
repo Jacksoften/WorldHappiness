@@ -8,15 +8,27 @@ data3 = read.csv("./data/2017.csv")
 # check the number of counties in each region
 ncountries_per_region = aggregate(Country ~ Region, data = data1, length)
 
+# First. We just look into the 2015 dataset.
 # parallel boxplots of six factors according to region
 # We want to know if six factors behave differently 
 #  across regions
-p1 = boxplot(Economy..GDP.per.Capita. ~ Region, data=data1)
-p2 = boxplot(Family ~ Region, data=data1)
-p3 = boxplot(Freedom ~ Region, data=data1)
-p4 = boxplot(Generosity ~ Region, data=data1)
-p5 = boxplot(Health..Life.Expectancy. ~ Region, data=data1)
-p6 = boxplot(Trust..Government.Corruption. ~ Region, data=data1)
+
+# p1 = boxplot(Economy..GDP.per.Capita. ~ Region, data=data1)
+# p2 = boxplot(Family ~ Region, data=data1)
+# p3 = boxplot(Freedom ~ Region, data=data1)
+# p4 = boxplot(Generosity ~ Region, data=data1)
+# p5 = boxplot(Health..Life.Expectancy. ~ Region, data=data1)
+# p6 = boxplot(Trust..Government.Corruption. ~ Region, data=data1)
+
+# Using ggplot2 
+library(ggplot2)
+p = ggplot(data=data1)
+p1 = p + geom_boxplot(aes(Region, Economy..GDP.per.Capita.))
+p2 = p + geom_boxplot(aes(Region, Family))
+p3 = p + geom_boxplot(aes(Region, Freedom))
+p4 = p + geom_boxplot(aes(Region, Generosity))
+p5 = p + geom_boxplot(aes(Region, Health..Life.Expectancy. ))
+p6 = p + geom_boxplot(aes(Region, Trust..Government.Corruption. ))
 
 
 # make a new data frame with only happiness score, region, and year.
@@ -42,25 +54,9 @@ Region.full[which(is.na(Region.full))] = "Eastern Asia"
 data3$Region = Region.full
 happiness.all$Region = unlist(list(data1$Region, data2$Region, data3$Region))
 
-# -------------------------ANOVA--------------------------------
 # parallel boxplot with two factors year and region
-p7 = boxplot(score~year*Region, data=happiness.all, xlab='year & region', ylab = 'happiness score') # might switch to ggplot2 for better interpretation.
-# Here we can see that time does not have obvious effects on scores
-# but region does have obvious effects.
-# We need two-way ANOVA to test it. 
-interation.model = aov(score ~ year * Region, data = happiness.all)
-interation.anova = anova(interation.model)
-# The p-value is rounded to 1, so we can conclude there is no interaction effect
-# then we drop the interation term from the model
-addition.model = aov(score~year+Region, data=happiness.all)
-addition.anova = anova(addition.model)
-# the p-value for year is large. -> no major effect of year factor
-# the p-value for Region is small, there is effect of region factor
-
-# Tukey pairwised comparisons
-regionOnly.model = aov(score~Region, data=happiness.all)
-regionOnly.tukey = TukeyHSD(regionOnly.model)
-# We can see if the difference between any pair of regions is statistically significant.
+# p7 = boxplot(score~year*Region, data=happiness.all, xlab='year & region', ylab = 'happiness score') # might switch to ggplot2 for better interpretation.
+p7 = ggplot(data=happiness.all) + geom_boxplot(aes(x=Region, y=score, color=Region))
 
 # data modification
 # since there is no significant effect of year, we can combine three tables together
@@ -72,34 +68,15 @@ data1new = data1[, !names(data1) %in% variation.names]
 data2new = data2[, !names(data2) %in% variation.names]
 data3new = data3[, !names(data3) %in% variation.names]
 full.table = rbind(data1new, data2new, data3new)
+# full table is saved to modified data for analysis
+
 # select only region factor and six target factors
 selected.table = full.table[,c(2,4,5,6,7,8,9,10)]
 # Rename columns for simplification
 names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
-p8 = pairs(selected.table)
+library(GGally)
+p8 = ggpairs(selected.table)
+# This plot is very nice, but takes a long to process
+# and might need some fine-tuning
 
-# ------------------------linear regression---------------------------------
-# Question: Should I start with multivariate linear regression or ANCOVA
-
-# model selection
-# 1. backward
-full.model = lm(Score~Economy+Family+Health+Freedom+Trust+Generosity, data=selected.table)
-drop1(full.model)
-# AIC values show that we should not drop any vairable
-
-# 2. Manually, in the plot, we can see that there is the least linear relationship
-#    between Score and Generosity, let us see if we can drop it.
-reduced.model.no.generosity = lm(Score~Economy+Family+Health+Freedom+Trust, data=selected.table)
-cat("full model, AIC: ", AIC(full.model), " BIC: ", BIC(full.model), "\n")
-cat("reduced model, AIC: ", AIC(reduced.model.no.generosity), " BIC: ", BIC(reduced.model.no.generosity), "\n")
-# AIC shows that we do not drop it, BIC shows we do need to drop it
-# NOTE: - consider use transformation on generosity
-#       - we might also consider transformation on trust since there is some non-linear
-#         relationship between trust an score
-
-# A TRY
-# we can fit a model with six vairables and region factor at the same time
-full.model.plus = aov(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
-
-cat("full model plut, AIC: ", AIC(full.model.plus), " BIC: ", BIC(full.model.plus), "\n")
-# The value of AIC dramatically droped, but BIC increased.
+# p8 = pairs(selected.table)
