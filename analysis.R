@@ -22,7 +22,6 @@ full.table = read.csv("./data/modified_data.csv")
 selected.table = full.table[,-c(1,2,4,12)]
 # Rename columns for simplification
 names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
-p8 = pairs(selected.table)
 
 # NOTE: Should we check assumptions here? 
 #       It is actually a uneqaul sized two-way ANOVA
@@ -70,10 +69,22 @@ cat("full model plus, AIC: ", AIC(full.model.plus),
 #       Might need to deal with colinearity
 #       p84: A primer on linear model
 
+# by EDA, we run model with region effect only on health and economy
+full.model.with.partial.region.effect = lm(Score~(Health+Economy)*Region+Family+Trust+Freedom+Generosity, data=selected.table)
 
+cat("full model new, AIC: ", AIC(full.model.with.partial.region.effect), 
+	" BIC: ", BIC(full.model.with.partial.region.effect), "\n")
 # --------------------------PCA---------------------------------
 # NOTE: Why should we use pca here?
 #       Creating new variables which is the combination of the 
 #       old ones, and fit the model to reduce the colinearity
 factors.table = selected.table[,-c(1,2)]
 factors.cor = cor(factors.table)
+# NOTE: In this correlation table, there are some variables have large correlation
+#       with each other. We might consider use pca to reduce those correlation
+
+pca.model = prcomp(factor.cor)
+pca.sum = summary(pca.model)
+# NOTE: We can take the first four components
+
+

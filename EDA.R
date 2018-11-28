@@ -76,7 +76,24 @@ selected.table = full.table[,c(2,4,5,6,7,8,9,10)]
 names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
 library(GGally)
 p8 = ggpairs(selected.table)
+# p8 = pairs(selected.table)
 # This plot is very nice, but takes a long to process
 # and might need some fine-tuning
+# NOTE: There are relationships between variables which brings the collinearity to the 
+#       model. We need to deal with it
 
-# p8 = pairs(selected.table)
+# In order to check the region effects on different variables we have
+# new boxplots on the full data.
+p.new = ggplot(data=selected.table)
+p1.new = p.new + geom_boxplot(aes(Region, Economy))
+p2.new = p.new + geom_boxplot(aes(Region, Family))
+p3.new = p.new + geom_boxplot(aes(Region, Freedom))
+p4.new = p.new + geom_boxplot(aes(Region, Generosity))
+p5.new = p.new + geom_boxplot(aes(Region, Health))
+p6.new = p.new + geom_boxplot(aes(Region, Trust))
+library(gridExtra)
+pfin = grid.arrange(p1.new, p2.new, p3.new, p4.new, p5.new, p6.new, nrow = 2)
+# NOTE: I think that the region has effect only on economy and health.
+#       Since the first box is for Austrilia region which only contains 
+#       two countries, we do not need to pay much attention to them
+
