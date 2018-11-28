@@ -1,0 +1,79 @@
+# -------------------------ANOVA--------------------------------
+# Here we can see that time does not have obvious effects on scores
+# but region does have obvious effects.
+# We need two-way ANOVA to test it. 
+happiness.all = read.csv('./data/happiness_region_year.csv')
+interation.model = aov(score ~ year * Region, data = happiness.all)
+interation.anova = anova(interation.model)
+# The p-value is rounded to 1, so we can conclude there is no interaction effect
+# then we drop the interation term from the model
+addition.model = aov(score~year+Region, data=happiness.all)
+addition.anova = anova(addition.model)
+# the p-value for year is large. -> no major effect of year factor
+# the p-value for Region is small, there is effect of region factor
+
+# Tukey pairwised comparisons
+regionOnly.model = aov(score~Region, data=happiness.all)
+regionOnly.tukey = TukeyHSD(regionOnly.model)
+# We can see if the difference between any pair of regions is statistically significant.
+
+full.table = read.csv("./data/modified_data.csv")
+# select only region factor and six target factors
+selected.table = full.table[,-c(1,2,4,12)]
+# Rename columns for simplification
+names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
+p8 = pairs(selected.table)
+
+# NOTE: Should we check assumptions here? 
+#       It is actually a uneqaul sized two-way ANOVA
+
+
+# ------------------------linear regression-------------------------
+# Question: Should I start with multivariate linear regression or ANCOVA
+
+# model selection
+# 1. backward
+full.model = lm(Score~Economy+Family+Health+Freedom+Trust+Generosity, data=selected.table)
+drop1(full.model)
+# AIC values show that we should not drop any vairable
+
+# 2. Manually, in the plot, we can see that there is the least linear relationship
+#    between Score and Generosity, let us see if we can drop it.
+reduced.model.no.generosity = lm(Score~Economy+Family+Health+Freedom+Trust, data=selected.table)
+cat("full model, AIC: ", AIC(full.model), 
+	" BIC: ", BIC(full.model), "\n")
+cat("reduced model, AIC: ", AIC(reduced.model.no.generosity), 
+	" BIC: ", BIC(reduced.model.no.generosity), "\n")
+# AIC shows that we do not drop it, BIC shows we do need to drop it
+# NOTE: - consider use transformation on generosity
+#       - we might also consider transformation on trust since there is some non-linear
+#         relationship between trust an score
+
+# A TRY
+# we can fit a model with six vairables and region factor at the same time
+full.model.plus = lm(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
+
+cat("full model plus, AIC: ", AIC(full.model.plus), 
+	" BIC: ", BIC(full.model.plus), "\n")
+# The value of AIC dramatically droped, but BIC increased.
+
+# NOTE: We might also need to consider randomized block design
+#       for countries, it is very similar comparing to the test
+#       students example from class.
+# !NO, we cannot use randomized block design here
+#   Because, the scores are independent with each other
+
+# NOTE: Should we check assumptions here? 
+#       It is actually a uneqaul sized two-way ANOVA
+
+# NOTE: There are relationship between variables.
+#       Might need to deal with colinearity
+#       p84: A primer on linear model
+
+
+# --------------------------PCA---------------------------------
+# NOTE: Why should we use pca here?
+#       Creating new variables which is the combination of the 
+#       old ones, and fit the model to reduce the colinearity
+factors.table = selected.table[,-c(1,2)]
+factors.cor = cor(factors.table)
