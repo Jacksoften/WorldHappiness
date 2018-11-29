@@ -1,0 +1,38 @@
+country: name of country  
+region: region the country belong to  
+
+6 factors 
+  economic production (Economy)
+  social support (Family)
+  life expectancy (Health)
+  freedom (Freedom)
+  absence of corruption (Trust)
+  generosity (Generosity)
+  happiness rank: rank of the country based on the happiness score
+
+  More descriptions for each one
+    happiness score: A metric measured in 2016 by asking the sampled people the question: "How would you rate your happiness on a scale of 0 to 10 where 10 is the happiest"  
+    Economy (GDP per Capita):  The extent to which GDP contributes to the calculation of the Happiness Score.  
+    Family:  The extent to which Family contributes to the calculation of the Happiness Score  
+    Health (Life Expectancy):  The extent to which Life expectancy contributed to the calculation of the Happiness Score  
+    Freedom:  The extent to which Freedom contributed to the calculation of the Happiness Score
+    Trust (Government Corruption):  The extent to which Perception of Corruption contributes to Happiness Score  
+    Generosity:  The extent to which Generosity contributed to the calculation of the Happiness Score  
+
+Dystopia Residual:  The extent to which Dystopia Residual contributed to the calculation of the Happiness Score.
+  Dystopia, a hypothetical country that has values equal to the world’s lowest national averages for each of the six factors. They have no impact on the total score reported for each country, but they do explain why some countries rank higher than others.
+
+# NOTE:
+happiness scores are from Gallup Poll  
+https://www.gallup.com/analytics/232838/world-poll.aspx
+
+2015.csv
+  Standard.Error: Standard.Error of the Happiness Score
+
+2016.csv
+  Lower Confidence Interval:  Lower Confidence Interval of the Happiness Score  
+  Upper Confidence Interval:  Upper Confidence Interval of the Happiness Score  
+
+2017.csv
+  Whisker.low: 3rd quartile of the Happiness Score
+  Whisker.high: 1rd quartile of the Happiness Score
