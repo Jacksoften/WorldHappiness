@@ -29,6 +29,8 @@ p3 = p + geom_boxplot(aes(Region, Freedom))
 p4 = p + geom_boxplot(aes(Region, Generosity))
 p5 = p + geom_boxplot(aes(Region, Health..Life.Expectancy. ))
 p6 = p + geom_boxplot(aes(Region, Trust..Government.Corruption. ))
+library(gridExtra)
+pfin1 = grid.arrange(p1, p2, p3, p4, p5, p6, nrow = 2)
 
 
 # make a new data frame with only happiness score, region, and year.
@@ -91,9 +93,10 @@ p3.new = p.new + geom_boxplot(aes(Region, Freedom))
 p4.new = p.new + geom_boxplot(aes(Region, Generosity))
 p5.new = p.new + geom_boxplot(aes(Region, Health))
 p6.new = p.new + geom_boxplot(aes(Region, Trust))
-library(gridExtra)
 pfin = grid.arrange(p1.new, p2.new, p3.new, p4.new, p5.new, p6.new, nrow = 2)
 # NOTE: I think that the region has effect only on economy and health.
 #       Since the first box is for Austrilia region which only contains 
 #       two countries, we do not need to pay much attention to them
+
+
 
