@@ -74,17 +74,33 @@ full.model.with.partial.region.effect = lm(Score~(Health+Economy)*Region+Family+
 
 cat("full model new, AIC: ", AIC(full.model.with.partial.region.effect), 
 	" BIC: ", BIC(full.model.with.partial.region.effect), "\n")
+
+reduced.model.with.partial.region.effect = lm(Score~(Health+Economy)*Region+Family+Trust+Freedom, data=selected.table)
+
 # --------------------------PCA---------------------------------
 # NOTE: Why should we use pca here?
 #       Creating new variables which is the combination of the 
 #       old ones, and fit the model to reduce the colinearity
-factors.table = selected.table[,-c(1,2)]
-factors.cor = cor(factors.table)
+factors.matrix = as.matrix(selected.table[,-c(1,2)])
+factors.cov = cov(factors.matrix)
 # NOTE: In this correlation table, there are some variables have large correlation
 #       with each other. We might consider use pca to reduce those correlation
 
-pca.model = prcomp(factor.cor)
+pca.model = prcomp(factors.cov)
 pca.sum = summary(pca.model)
 # NOTE: We can take the first four components
 
+pca.table = cbind(selected.table[,c(1,2)], 
+				  factors.matrix %*% pca.sum$x[,1:4])
 
+# factors.eigen = eigen(factors.cor)
+# pc1 = t(factors.eigen$vectors[,1] %*% t(factors.matrix))
+# pc2 = t(factors.eigen$vectors[,2] %*% t(factors.matrix))
+
+pca.lm.model = lm(Score ~ PC1 + PC2 + PC3 + PC4, data=pca.table)
+cat("pca model, AIC: ", AIC(pca.lm.model), 
+	" BIC: ", BIC(pca.lm.model), '\n')
+
+pca.lm.model.with.region = lm(Score ~ (PC1 + PC2 + PC3 + PC4) * Region, data=pca.table)
+cat("pca model, AIC: ", AIC(pca.lm.model.with.region), 
+	" BIC: ", BIC(pca.lm.model.with.region), '\n')
