@@ -22,7 +22,7 @@ ncountries_per_region = aggregate(Country ~ Region, data = data1, length)
 
 # Using ggplot2 
 library(ggplot2)
-p = ggplot(data=data1)
+p = ggplot(data=data1) # 2017 Data
 p1 = p + geom_boxplot(aes(Region, Economy..GDP.per.Capita.))
 p2 = p + geom_boxplot(aes(Region, Family))
 p3 = p + geom_boxplot(aes(Region, Freedom))
@@ -30,7 +30,7 @@ p4 = p + geom_boxplot(aes(Region, Generosity))
 p5 = p + geom_boxplot(aes(Region, Health..Life.Expectancy. ))
 p6 = p + geom_boxplot(aes(Region, Trust..Government.Corruption. ))
 library(gridExtra)
-pfin1 = grid.arrange(p1, p2, p3, p4, p5, p6, nrow = 2)
+# pfin1 = grid.arrange(p1, p2, p3, p4, p5, p6, nrow = 2)
 
 
 # make a new data frame with only happiness score, region, and year.
@@ -77,7 +77,7 @@ selected.table = full.table[,c(2,4,5,6,7,8,9,10)]
 # Rename columns for simplification
 names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
 library(GGally)
-p8 = ggpairs(selected.table)
+# p8 = ggpairs(selected.table)
 # p8 = pairs(selected.table)
 # This plot is very nice, but takes a long to process
 # and might need some fine-tuning
@@ -93,10 +93,15 @@ p3.new = p.new + geom_boxplot(aes(Region, Freedom))
 p4.new = p.new + geom_boxplot(aes(Region, Generosity))
 p5.new = p.new + geom_boxplot(aes(Region, Health))
 p6.new = p.new + geom_boxplot(aes(Region, Trust))
-pfin = grid.arrange(p1.new, p2.new, p3.new, p4.new, p5.new, p6.new, nrow = 2)
+# pfin = grid.arrange(p1.new, p2.new, p3.new, p4.new, p5.new, p6.new, nrow = 2)
 # NOTE: I think that the region has effect only on economy and health.
 #       Since the first box is for Austrilia region which only contains 
 #       two countries, we do not need to pay much attention to them
 
-
-
+cor.matrix = cor(selected.table[,-c(1,2)])
+cor.matrix.rotate = apply(cor.matrix, 2, rev)
+expand.cor = cbind(expand.grid(colnames(cor.matrix.rotate), 
+							   rownames(cor.matrix.rotate)),
+				   value = matrix(cor.matrix.rotate, ncol=1))
+p.cor = ggplot(data=expand.cor, aes(x=Var1, y=Var2, fill=value)) + 
+		geom_tile() + scale_x_discrete(position='top')
