@@ -70,9 +70,26 @@ Region.full[which(is.na(Region.full))] = "EA"
 data3$Region = Region.full
 happiness.all$Region = unlist(list(data1$Region, data2$Region, data3$Region))
 
+
 # parallel boxplot with two factors year and region
 # p7 = boxplot(score~year*Region, data=happiness.all, xlab='year & region', ylab = 'happiness score') # might switch to ggplot2 for better interpretation.
 p7 = ggplot(data=happiness.all) + geom_boxplot(aes(x=Region, y=score, color=Region))
+
+# interaction plots for two factors year and region
+inter.region = interaction.plot(x.factor = happiness.all$year,
+							  trace.factor=happiness.all$Region,
+							  response = happiness.all$score, 
+							  fun = mean, type = "b", legend = TRUE,
+							  xlab = "year", ylab="Region",
+							  pch=c(1,19),col=c("blue","red","purple","yellow","green","brown","pink","powderblue","orange","palegreen"))
+
+
+inter.year = interaction.plot(x.factor = happiness.all$Region,
+								trace.factor=happiness.all$year,
+								response = happiness.all$score, 
+								fun = mean, type = "b", legend = TRUE,
+								xlab = "year", ylab="Region",
+								pch=c(1,19),col=c("blue","red","green"))
 
 # data modification
 # since there is no significant effect of year, we can combine three tables together
