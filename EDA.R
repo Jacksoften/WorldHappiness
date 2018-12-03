@@ -76,20 +76,23 @@ happiness.all$Region = unlist(list(data1$Region, data2$Region, data3$Region))
 p7 = ggplot(data=happiness.all) + geom_boxplot(aes(x=Region, y=score, color=Region))
 
 # interaction plots for two factors year and region
+pdf("./plots/interaction_Region.pdf")
 inter.region = interaction.plot(x.factor = happiness.all$year,
 								trace.factor=happiness.all$Region,
 								response = happiness.all$score, 
 								fun = mean, type = "b", legend = TRUE,
-								xlab = "year", ylab="Region",
+								xlab = "year", ylab="happiness score",
 								pch=c(1,19),col=c("blue","red","purple","yellow","green","brown","pink","powderblue","orange","palegreen"))
+dev.off()
 
-
+pdf("./plots/interaction_year.pdf")
 inter.year = interaction.plot(x.factor = happiness.all$Region,
 							  trace.factor=happiness.all$year,
 							  response = happiness.all$score,
 							  fun = mean, type = "b", legend = TRUE,
-							  xlab = "Region", ylab="year",
+							  xlab = "Region", ylab="happiness score",
 							  pch=c(1,19),col=c("blue","red","green"))
+dev.off()
 
 # data modification
 # since there is no significant effect of year, we can combine three tables together
@@ -135,7 +138,11 @@ expand.cor = cbind(expand.grid(rownames(cor.matrix.rotate),
 							   colnames(cor.matrix.rotate)),
 				   value = matrix(cor.matrix.rotate, ncol=1))
 p.cor = ggplot(data=expand.cor, aes(x=Var1, y=Var2, fill=value)) + 
-		geom_tile() + scale_x_discrete(position='top') + xlab(NULL) + ylab(NULL)
+		geom_tile() + scale_x_discrete(position='top') + 
+		xlab(NULL) + ylab(NULL) + 
+		scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+							 midpoint = 0, limit = c(-1,1), space = "Lab", 
+							 name="correlation")
 
 
 # ----------------TODO----------------------
