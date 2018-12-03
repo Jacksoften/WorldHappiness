@@ -26,18 +26,19 @@ names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Fre
 # NOTE: Should we check assumptions here? 
 #       It is actually a uneqaul sized two-way ANOVA
 
-
 # ------------------------linear regression-------------------------
 # Question: Should I start with multivariate linear regression or ANCOVA
 
 # model selection
 # 1. backward
+# Model1
 full.model = lm(Score~Economy+Family+Health+Freedom+Trust+Generosity, data=selected.table)
 drop1(full.model)
 # AIC values show that we should not drop any vairable
 
 # 2. Manually, in the plot, we can see that there is the least linear relationship
 #    between Score and Generosity, let us see if we can drop it.
+# Model2
 reduced.model.no.generosity = lm(Score~Economy+Family+Health+Freedom+Trust, data=selected.table)
 cat("full model, AIC: ", AIC(full.model), 
 	" BIC: ", BIC(full.model), "\n")
@@ -50,10 +51,11 @@ cat("reduced model, AIC: ", AIC(reduced.model.no.generosity),
 
 # A TRY
 # we can fit a model with six vairables and region factor at the same time
-full.model.plus = lm(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
+# Model3
+full.model.with.all.interactions = lm(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
 
-cat("full model plus, AIC: ", AIC(full.model.plus), 
-	" BIC: ", BIC(full.model.plus), "\n")
+cat("full model with region interaction with all factors, AIC: ", AIC(full.model.with.all.interactions), 
+	" BIC: ", BIC(full.model.with.all.interactions), "\n")
 # The value of AIC dramatically droped, but BIC increased.
 
 # NOTE: We might also need to consider randomized block design
@@ -67,15 +69,23 @@ cat("full model plus, AIC: ", AIC(full.model.plus),
 
 # NOTE: There are relationship between variables.
 #       Might need to deal with colinearity
-#       p84: A primer on linear model
+#       p84: Linear models in R
 
 # by EDA, we run model with region effect only on health and economy
+# model4
 full.model.with.partial.region.effect = lm(Score~(Health+Economy)*Region+Family+Trust+Freedom+Generosity, data=selected.table)
 
-cat("full model new, AIC: ", AIC(full.model.with.partial.region.effect), 
+cat("full model with region interaction with health and economy, AIC: ", AIC(full.model.with.partial.region.effect), 
 	" BIC: ", BIC(full.model.with.partial.region.effect), "\n")
 
+# model5
 reduced.model.with.partial.region.effect = lm(Score~(Health+Economy)*Region+Family+Trust+Freedom, data=selected.table)
+
+cat("reduced model with region interaction with health and economy, AIC: ", AIC(reduced.model.with.partial.region.effect), 
+	" BIC: ", BIC(reduced.model.with.partial.region.effect), "\n")
+
+# NOTE: Should we rely on AIC and BIC? They are giving different result for our model. 
+# 		Or, should we keep the principal that simplicity of model is the most important
 
 # --------------------------PCA---------------------------------
 # NOTE: Why should we use pca here?
@@ -104,3 +114,8 @@ cat("pca model, AIC: ", AIC(pca.lm.model),
 pca.lm.model.with.region = lm(Score ~ (PC1 + PC2 + PC3 + PC4) * Region, data=pca.table)
 cat("pca model, AIC: ", AIC(pca.lm.model.with.region), 
 	" BIC: ", BIC(pca.lm.model.with.region), '\n')
+
+# NOTE: Since The generosity does not have a strong effect on our model
+# 		We can consider to drop this variable for model simplicity.
+
+
