@@ -5,7 +5,7 @@ A discovery of what affects happiness
 From [kaggle](https://www.kaggle.com/unsdsn/world-happiness/home)
 
 # Methods
-Regression \s Model Selection \s ANOVA \s PCA
+Regression <br/> Model Selection <br/> ANOVA <br/> PCA
 
 # Work Notes
 + First we want to know if region has effect on happiness score, then we used boxplots on 2017 dataset. There is an obvious difference for different groups. 
