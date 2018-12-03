@@ -20,6 +20,20 @@ ncountries_per_region = aggregate(Country ~ Region, data = data1, length)
 # p5 = boxplot(Health..Life.Expectancy. ~ Region, data=data1)
 # p6 = boxplot(Trust..Government.Corruption. ~ Region, data=data1)
 
+# For plot display, we use initials of Regions instead of their full names
+# Australia and New Zealand -- ANZ
+# Central and Eastern Europe -- CEE
+# Eastern Asia -- EA
+# Latin America and Caribbean -- LAC
+# Middle East and Northern Africa -- MNA
+# North America -- NA
+# Southeastern Asia -- SEA
+# Southern Aisa -- SA
+# Sub-Saharan Africa -- SSA
+# Western Europe -- WE
+levels(data1$Region) = c("ANZ", "CEE", "EA", "LAC", "MNA", "NA", "SEA", "SA", "SSA", "WE")
+levels(data2$Region) = c("ANZ", "CEE", "EA", "LAC", "MNA", "NA", "SEA", "SA", "SSA", "WE")
+
 # Using ggplot2 
 library(ggplot2)
 p = ggplot(data=data1) # 2017 Data
@@ -52,7 +66,7 @@ Region.full = Region3_1
 # They are Taiwan region and Hongkong region
 # so we mannaul put them into Eastern Asia region
 Region.full[is.na(Region.full)] = Region3_2[is.na(Region.full)]
-Region.full[which(is.na(Region.full))] = "Eastern Asia"
+Region.full[which(is.na(Region.full))] = "EA"
 data3$Region = Region.full
 happiness.all$Region = unlist(list(data1$Region, data2$Region, data3$Region))
 
