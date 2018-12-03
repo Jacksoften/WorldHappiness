@@ -1,3 +1,7 @@
+# NOTE:
+# sink() for saving R output to a file
+# pdf() for saving R graph to a pdf
+
 # -------------------------ANOVA--------------------------------
 # Here we can see that time does not have obvious effects on scores
 # but region does have obvious effects.
