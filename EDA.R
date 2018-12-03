@@ -100,8 +100,8 @@ p6.new = p.new + geom_boxplot(aes(Region, Trust))
 
 cor.matrix = cor(selected.table[,-c(1,2)])
 cor.matrix.rotate = apply(cor.matrix, 2, rev)
-expand.cor = cbind(expand.grid(colnames(cor.matrix.rotate), 
-							   rownames(cor.matrix.rotate)),
+expand.cor = cbind(expand.grid(rownames(cor.matrix.rotate), 
+							   colnames(cor.matrix.rotate)),
 				   value = matrix(cor.matrix.rotate, ncol=1))
 p.cor = ggplot(data=expand.cor, aes(x=Var1, y=Var2, fill=value)) + 
 		geom_tile() + scale_x_discrete(position='top')
