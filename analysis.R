@@ -56,10 +56,9 @@ cat("reduced model, AIC: ", AIC(reduced.model.no.generosity),
 # A TRY
 # we can fit a model with six vairables and region factor at the same time
 # Model3
-full.model.with.all.interactions = lm(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
-
-cat("full model with region interaction with all factors, AIC: ", AIC(full.model.with.all.interactions), 
-	" BIC: ", BIC(full.model.with.all.interactions), "\n")
+model3 = lm(Score~(Economy+Family+Health+Freedom+Trust+Generosity)*Region, data=selected.table)
+cat("full model with region interaction with all factors, AIC: ", AIC(model3), 
+	" BIC: ", BIC(model3), "\n")
 # The value of AIC dramatically droped, but BIC increased.
 
 # NOTE: We might also need to consider randomized block design
@@ -102,20 +101,20 @@ factors.cov = cov(factors.matrix)
 
 pca.model = prcomp(factors.cov)
 pca.sum = summary(pca.model)
-# NOTE: We can take the first four components
+# NOTE: We can take the first two components
 
 pca.table = cbind(selected.table[,c(1,2)], 
-				  factors.matrix %*% pca.sum$x[,1:4])
+				  factors.matrix %*% pca.sum$x[,1:2])
 
 # factors.eigen = eigen(factors.cor)
 # pc1 = t(factors.eigen$vectors[,1] %*% t(factors.matrix))
 # pc2 = t(factors.eigen$vectors[,2] %*% t(factors.matrix))
 
-pca.lm.model = lm(Score ~ PC1 + PC2 + PC3 + PC4, data=pca.table)
+pca.lm.model = lm(Score ~ PC1 + PC2, data=pca.table)
 cat("pca model, AIC: ", AIC(pca.lm.model), 
 	" BIC: ", BIC(pca.lm.model), '\n')
 
-pca.lm.model.with.region = lm(Score ~ (PC1 + PC2 + PC3 + PC4) * Region, data=pca.table)
+pca.lm.model.with.region = lm(Score ~ (PC1 + PC2) * Region, data=pca.table)
 cat("pca model, AIC: ", AIC(pca.lm.model.with.region), 
 	" BIC: ", BIC(pca.lm.model.with.region), '\n')
 
@@ -123,3 +122,10 @@ cat("pca model, AIC: ", AIC(pca.lm.model.with.region),
 # 		We can consider to drop this variable for model simplicity.
 
 
+pca.lm.model1 = lm(Score ~ PC1, data=pca.table)
+cat("pca model, AIC: ", AIC(pca.lm.model1), 
+	" BIC: ", BIC(pca.lm.model1), '\n')
+
+pca.lm.model.with.region1 = lm(Score ~ PC1 * Region, data=pca.table)
+cat("pca model, AIC: ", AIC(pca.lm.model.with.region1), 
+	" BIC: ", BIC(pca.lm.model.with.region1), '\n')

@@ -73,7 +73,7 @@ happiness.all$Region = unlist(list(data1$Region, data2$Region, data3$Region))
 
 # parallel boxplot with two factors year and region
 # p7 = boxplot(score~year*Region, data=happiness.all, xlab='year & region', ylab = 'happiness score') # might switch to ggplot2 for better interpretation.
-p7 = ggplot(data=happiness.all) + geom_boxplot(aes(x=Region, y=score, color=Region))
+p7 = ggplot(data=happiness.all) + geom_boxplot(aes(x=Region, y=score, color=year))
 
 # interaction plots for two factors year and region
 pdf("./plots/interaction_Region.pdf")
