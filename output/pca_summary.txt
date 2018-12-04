@@ -1,0 +1,29 @@
+
+Call:
+lm(formula = Score ~ PC1 + PC2, data = pca.table)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1214 -0.5489 -0.1044  0.5886  2.3613 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   3.71567    0.09822  37.829   <2e-16 ***
+PC1         -12.91904    0.58502 -22.083   <2e-16 ***
+PC2          -2.78116    2.89214  -0.962    0.337    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.7969 on 467 degrees of freedom
+Multiple R-squared:  0.5108,	Adjusted R-squared:  0.5087 
+F-statistic: 243.8 on 2 and 467 DF,  p-value: < 2.2e-16
+
+full model, AIC:  792.2431  BIC:  825.465 
+reduced model, AIC:  793.059  BIC:  822.1281 
+full model with region interaction with all factors, AIC:  593.5767  BIC:  880.1153 
+full model with region interaction with health and economy, AIC:  663.8726  BIC:  809.2183 
+reduced model with region interaction with health and economy, AIC:  665.7833  BIC:  806.9762 
+pca model, AIC:  1125.423  BIC:  1142.033 
+pca model, AIC:  801.6758  BIC:  930.4105 
+pca model, AIC:  1124.352  BIC:  1136.81 
+pca model, AIC:  817.5505  BIC:  904.7578 

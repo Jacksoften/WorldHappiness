@@ -1,0 +1,85 @@
+
+Call:
+lm(formula = Score ~ (Health + Economy) * Region + Family + Trust + 
+    Freedom, data = selected.table)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.50286 -0.28525  0.01695  0.27723  1.36122 
+
+Coefficients:
+                                               Estimate Std. Error t value
+(Intercept)                                    5.968973   8.969788   0.665
+Health                                        -0.525604   6.102647  -0.086
+Economy                                        0.142453   3.329586   0.043
+RegionCentral and Eastern Europe              -2.265566   8.971716  -0.253
+RegionEastern Asia                            -3.441135   9.006467  -0.382
+RegionLatin America and Caribbean             -3.533946   8.974564  -0.394
+RegionMiddle East and Northern Africa         -4.504245   8.977788  -0.502
+RegionNorth America                           13.846109  29.823259   0.464
+RegionSoutheastern Asia                       -3.614778   8.980640  -0.403
+RegionSouthern Asia                           -2.297572   8.978453  -0.256
+RegionSub-Saharan Africa                      -2.914978   8.968359  -0.325
+RegionWestern Europe                          -7.836728   9.157602  -0.856
+Family                                         0.498967   0.095696   5.214
+Trust                                          0.358424   0.291152   1.231
+Freedom                                        1.307105   0.211281   6.187
+Health:RegionCentral and Eastern Europe       -0.007565   6.128482  -0.001
+Health:RegionEastern Asia                      0.839142   6.218378   0.135
+Health:RegionLatin America and Caribbean       2.528936   6.129489   0.413
+Health:RegionMiddle East and Northern Africa   2.825915   6.133182   0.461
+Health:RegionNorth America                    -7.168392  17.627352  -0.407
+Health:RegionSoutheastern Asia                 0.906254   6.168033   0.147
+Health:RegionSouthern Asia                     0.784706   6.168829   0.127
+Health:RegionSub-Saharan Africa                0.553158   6.112180   0.091
+Health:RegionWestern Europe                    3.736022   6.271771   0.596
+Economy:RegionCentral and Eastern Europe       0.850990   3.337971   0.255
+Economy:RegionEastern Asia                     1.217529   3.423878   0.356
+Economy:RegionLatin America and Caribbean      1.073732   3.341422   0.321
+Economy:RegionMiddle East and Northern Africa  1.175021   3.342511   0.352
+Economy:RegionNorth America                   -5.417308  10.840284  -0.500
+Economy:RegionSoutheastern Asia                1.614906   3.352975   0.482
+Economy:RegionSouthern Asia                   -0.258549   3.380561  -0.076
+Economy:RegionSub-Saharan Africa               0.310107   3.331565   0.093
+Economy:RegionWestern Europe                   3.054305   3.393825   0.900
+                                              Pr(>|t|)    
+(Intercept)                                      0.506    
+Health                                           0.931    
+Economy                                          0.966    
+RegionCentral and Eastern Europe                 0.801    
+RegionEastern Asia                               0.703    
+RegionLatin America and Caribbean                0.694    
+RegionMiddle East and Northern Africa            0.616    
+RegionNorth America                              0.643    
+RegionSoutheastern Asia                          0.688    
+RegionSouthern Asia                              0.798    
+RegionSub-Saharan Africa                         0.745    
+RegionWestern Europe                             0.393    
+Family                                        2.86e-07 ***
+Trust                                            0.219    
+Freedom                                       1.42e-09 ***
+Health:RegionCentral and Eastern Europe          0.999    
+Health:RegionEastern Asia                        0.893    
+Health:RegionLatin America and Caribbean         0.680    
+Health:RegionMiddle East and Northern Africa     0.645    
+Health:RegionNorth America                       0.684    
+Health:RegionSoutheastern Asia                   0.883    
+Health:RegionSouthern Asia                       0.899    
+Health:RegionSub-Saharan Africa                  0.928    
+Health:RegionWestern Europe                      0.552    
+Economy:RegionCentral and Eastern Europe         0.799    
+Economy:RegionEastern Asia                       0.722    
+Economy:RegionLatin America and Caribbean        0.748    
+Economy:RegionMiddle East and Northern Africa    0.725    
+Economy:RegionNorth America                      0.618    
+Economy:RegionSoutheastern Asia                  0.630    
+Economy:RegionSouthern Asia                      0.939    
+Economy:RegionSub-Saharan Africa                 0.926    
+Economy:RegionWestern Europe                     0.369    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.474 on 437 degrees of freedom
+Multiple R-squared:  0.8381,	Adjusted R-squared:  0.8262 
+F-statistic: 70.68 on 32 and 437 DF,  p-value: < 2.2e-16
+

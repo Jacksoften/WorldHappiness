@@ -1,0 +1,315 @@
+
+Call:
+lm(formula = Score ~ (Economy + Family + Health + Freedom + Trust + 
+    Generosity) * Region, data = selected.table)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.3586 -0.2351  0.0000  0.2463  1.5316 
+
+Coefficients: (2 not defined because of singularities)
+                                                   Estimate Std. Error t value
+(Intercept)                                         5.15625   82.96975   0.062
+Economy                                             0.68357   29.38796   0.023
+Family                                             -0.28517    5.21020  -0.055
+Health                                             -0.31579   47.63080  -0.007
+Freedom                                             1.90108   43.19112   0.044
+Trust                                               0.46352   40.86414   0.011
+Generosity                                          1.10290    0.51504   2.141
+RegionCentral and Eastern Europe                   -1.08289   82.97148  -0.013
+RegionEastern Asia                                 -5.56963   83.01173  -0.067
+RegionLatin America and Caribbean                  -2.19460   82.97096  -0.026
+RegionMiddle East and Northern Africa              -3.94357   82.97041  -0.048
+RegionNorth America                                -8.34901 1898.50905  -0.004
+RegionSoutheastern Asia                            -2.12751   82.97762  -0.026
+RegionSouthern Asia                                -2.11847   82.97148  -0.026
+RegionSub-Saharan Africa                           -2.57327   82.96997  -0.031
+RegionWestern Europe                               -4.32619   82.98382  -0.052
+Economy:RegionCentral and Eastern Europe            0.43052   29.38915   0.015
+Economy:RegionEastern Asia                          1.94186   29.41366   0.066
+Economy:RegionLatin America and Caribbean           0.80571   29.38956   0.027
+Economy:RegionMiddle East and Northern Africa       0.92540   29.38977   0.031
+Economy:RegionNorth America                         2.77848  688.54612   0.004
+Economy:RegionSoutheastern Asia                     0.70970   29.39225   0.024
+Economy:RegionSouthern Asia                        -0.42123   29.39492  -0.014
+Economy:RegionSub-Saharan Africa                    0.03832   29.38847   0.001
+Economy:RegionWestern Europe                        0.69014   29.39472   0.023
+Family:RegionCentral and Eastern Europe             0.59096    5.21432   0.113
+Family:RegionEastern Asia                           0.22680    5.24593   0.043
+Family:RegionLatin America and Caribbean           -0.14393    5.21806  -0.028
+Family:RegionMiddle East and Northern Africa        0.89338    5.21695   0.171
+Family:RegionNorth America                          0.05936   34.91613   0.002
+Family:RegionSoutheastern Asia                      0.89088    5.23072   0.170
+Family:RegionSouthern Asia                          1.03770    5.23252   0.198
+Family:RegionSub-Saharan Africa                     0.85898    5.21225   0.165
+Family:RegionWestern Europe                         0.77634    5.21961   0.149
+Health:RegionCentral and Eastern Europe            -0.87595   47.63513  -0.018
+Health:RegionEastern Asia                           3.00074   47.66150   0.063
+Health:RegionLatin America and Caribbean            2.38954   47.63432   0.050
+Health:RegionMiddle East and Northern Africa        3.16861   47.63453   0.067
+Health:RegionNorth America                          7.91241 1661.91987   0.005
+Health:RegionSoutheastern Asia                      1.87935   47.63954   0.039
+Health:RegionSouthern Asia                          3.25545   47.64375   0.068
+Health:RegionSub-Saharan Africa                     0.01375   47.63188   0.000
+Health:RegionWestern Europe                         2.59085   47.64897   0.054
+Freedom:RegionCentral and Eastern Europe            0.07116   43.19355   0.002
+Freedom:RegionEastern Asia                          0.80399   43.29849   0.019
+Freedom:RegionLatin America and Caribbean          -0.10053   43.19438  -0.002
+Freedom:RegionMiddle East and Northern Africa      -0.50649   43.19583  -0.012
+Freedom:RegionNorth America                        -4.86249 1099.84438  -0.004
+Freedom:RegionSoutheastern Asia                    -2.91065   43.22394  -0.067
+Freedom:RegionSouthern Asia                        -4.81881   43.20959  -0.112
+Freedom:RegionSub-Saharan Africa                   -1.05694   43.19229  -0.024
+Freedom:RegionWestern Europe                       -1.04370   43.20006  -0.024
+Trust:RegionCentral and Eastern Europe             -1.71186   40.87024  -0.042
+Trust:RegionEastern Asia                           -7.81294   41.07294  -0.190
+Trust:RegionLatin America and Caribbean             0.55325   40.88097   0.014
+Trust:RegionMiddle East and Northern Africa        -1.14660   40.87147  -0.028
+Trust:RegionNorth America                           2.01318  396.67712   0.005
+Trust:RegionSoutheastern Asia                      -0.94589   40.87283  -0.023
+Trust:RegionSouthern Asia                           7.92399   40.97305   0.193
+Trust:RegionSub-Saharan Africa                     -0.48968   40.86709  -0.012
+Trust:RegionWestern Europe                          2.27744   40.86920   0.056
+Generosity:RegionCentral and Eastern Europe        -0.74134    0.80861  -0.917
+Generosity:RegionEastern Asia                       0.34961    1.84637   0.189
+Generosity:RegionLatin America and Caribbean       -1.64504    0.81863  -2.009
+Generosity:RegionMiddle East and Northern Africa   -3.12830    0.75567  -4.140
+Generosity:RegionNorth America                           NA         NA      NA
+Generosity:RegionSoutheastern Asia                 -0.73027    0.83994  -0.869
+Generosity:RegionSouthern Asia                     -2.06600    1.51880  -1.360
+Generosity:RegionSub-Saharan Africa                 1.45379    0.77159   1.884
+Generosity:RegionWestern Europe                          NA         NA      NA
+                                                 Pr(>|t|)    
+(Intercept)                                        0.9505    
+Economy                                            0.9815    
+Family                                             0.9564    
+Health                                             0.9947    
+Freedom                                            0.9649    
+Trust                                              0.9910    
+Generosity                                         0.0328 *  
+RegionCentral and Eastern Europe                   0.9896    
+RegionEastern Asia                                 0.9465    
+RegionLatin America and Caribbean                  0.9789    
+RegionMiddle East and Northern Africa              0.9621    
+RegionNorth America                                0.9965    
+RegionSoutheastern Asia                            0.9796    
+RegionSouthern Asia                                0.9796    
+RegionSub-Saharan Africa                           0.9753    
+RegionWestern Europe                               0.9584    
+Economy:RegionCentral and Eastern Europe           0.9883    
+Economy:RegionEastern Asia                         0.9474    
+Economy:RegionLatin America and Caribbean          0.9781    
+Economy:RegionMiddle East and Northern Africa      0.9749    
+Economy:RegionNorth America                        0.9968    
+Economy:RegionSoutheastern Asia                    0.9807    
+Economy:RegionSouthern Asia                        0.9886    
+Economy:RegionSub-Saharan Africa                   0.9990    
+Economy:RegionWestern Europe                       0.9813    
+Family:RegionCentral and Eastern Europe            0.9098    
+Family:RegionEastern Asia                          0.9655    
+Family:RegionLatin America and Caribbean           0.9780    
+Family:RegionMiddle East and Northern Africa       0.8641    
+Family:RegionNorth America                         0.9986    
+Family:RegionSoutheastern Asia                     0.8648    
+Family:RegionSouthern Asia                         0.8429    
+Family:RegionSub-Saharan Africa                    0.8692    
+Family:RegionWestern Europe                        0.8818    
+Health:RegionCentral and Eastern Europe            0.9853    
+Health:RegionEastern Asia                          0.9498    
+Health:RegionLatin America and Caribbean           0.9600    
+Health:RegionMiddle East and Northern Africa       0.9470    
+Health:RegionNorth America                         0.9962    
+Health:RegionSoutheastern Asia                     0.9686    
+Health:RegionSouthern Asia                         0.9456    
+Health:RegionSub-Saharan Africa                    0.9998    
+Health:RegionWestern Europe                        0.9567    
+Freedom:RegionCentral and Eastern Europe           0.9987    
+Freedom:RegionEastern Asia                         0.9852    
+Freedom:RegionLatin America and Caribbean          0.9981    
+Freedom:RegionMiddle East and Northern Africa      0.9907    
+Freedom:RegionNorth America                        0.9965    
+Freedom:RegionSoutheastern Asia                    0.9463    
+Freedom:RegionSouthern Asia                        0.9113    
+Freedom:RegionSub-Saharan Africa                   0.9805    
+Freedom:RegionWestern Europe                       0.9807    
+Trust:RegionCentral and Eastern Europe             0.9666    
+Trust:RegionEastern Asia                           0.8492    
+Trust:RegionLatin America and Caribbean            0.9892    
+Trust:RegionMiddle East and Northern Africa        0.9776    
+Trust:RegionNorth America                          0.9960    
+Trust:RegionSoutheastern Asia                      0.9815    
+Trust:RegionSouthern Asia                          0.8467    
+Trust:RegionSub-Saharan Africa                     0.9904    
+Trust:RegionWestern Europe                         0.9556    
+Generosity:RegionCentral and Eastern Europe        0.3598    
+Generosity:RegionEastern Asia                      0.8499    
+Generosity:RegionLatin America and Caribbean       0.0452 *  
+Generosity:RegionMiddle East and Northern Africa 4.24e-05 ***
+Generosity:RegionNorth America                         NA    
+Generosity:RegionSoutheastern Asia                 0.3851    
+Generosity:RegionSouthern Asia                     0.1745    
+Generosity:RegionSub-Saharan Africa                0.0603 .  
+Generosity:RegionWestern Europe                        NA    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4248 on 402 degrees of freedom
+Multiple R-squared:  0.8804,	Adjusted R-squared:  0.8604 
+F-statistic: 44.15 on 67 and 402 DF,  p-value: < 2.2e-16
+
+
+Call:
+lm(formula = Score ~ (Health + Economy) * Region + Family + Trust + 
+    Freedom, data = selected.table)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.50286 -0.28525  0.01695  0.27723  1.36122 
+
+Coefficients:
+                                               Estimate Std. Error t value
+(Intercept)                                    5.968973   8.969788   0.665
+Health                                        -0.525604   6.102647  -0.086
+Economy                                        0.142453   3.329586   0.043
+RegionCentral and Eastern Europe              -2.265566   8.971716  -0.253
+RegionEastern Asia                            -3.441135   9.006467  -0.382
+RegionLatin America and Caribbean             -3.533946   8.974564  -0.394
+RegionMiddle East and Northern Africa         -4.504245   8.977788  -0.502
+RegionNorth America                           13.846109  29.823259   0.464
+RegionSoutheastern Asia                       -3.614778   8.980640  -0.403
+RegionSouthern Asia                           -2.297572   8.978453  -0.256
+RegionSub-Saharan Africa                      -2.914978   8.968359  -0.325
+RegionWestern Europe                          -7.836728   9.157602  -0.856
+Family                                         0.498967   0.095696   5.214
+Trust                                          0.358424   0.291152   1.231
+Freedom                                        1.307105   0.211281   6.187
+Health:RegionCentral and Eastern Europe       -0.007565   6.128482  -0.001
+Health:RegionEastern Asia                      0.839142   6.218378   0.135
+Health:RegionLatin America and Caribbean       2.528936   6.129489   0.413
+Health:RegionMiddle East and Northern Africa   2.825915   6.133182   0.461
+Health:RegionNorth America                    -7.168392  17.627352  -0.407
+Health:RegionSoutheastern Asia                 0.906254   6.168033   0.147
+Health:RegionSouthern Asia                     0.784706   6.168829   0.127
+Health:RegionSub-Saharan Africa                0.553158   6.112180   0.091
+Health:RegionWestern Europe                    3.736022   6.271771   0.596
+Economy:RegionCentral and Eastern Europe       0.850990   3.337971   0.255
+Economy:RegionEastern Asia                     1.217529   3.423878   0.356
+Economy:RegionLatin America and Caribbean      1.073732   3.341422   0.321
+Economy:RegionMiddle East and Northern Africa  1.175021   3.342511   0.352
+Economy:RegionNorth America                   -5.417308  10.840284  -0.500
+Economy:RegionSoutheastern Asia                1.614906   3.352975   0.482
+Economy:RegionSouthern Asia                   -0.258549   3.380561  -0.076
+Economy:RegionSub-Saharan Africa               0.310107   3.331565   0.093
+Economy:RegionWestern Europe                   3.054305   3.393825   0.900
+                                              Pr(>|t|)    
+(Intercept)                                      0.506    
+Health                                           0.931    
+Economy                                          0.966    
+RegionCentral and Eastern Europe                 0.801    
+RegionEastern Asia                               0.703    
+RegionLatin America and Caribbean                0.694    
+RegionMiddle East and Northern Africa            0.616    
+RegionNorth America                              0.643    
+RegionSoutheastern Asia                          0.688    
+RegionSouthern Asia                              0.798    
+RegionSub-Saharan Africa                         0.745    
+RegionWestern Europe                             0.393    
+Family                                        2.86e-07 ***
+Trust                                            0.219    
+Freedom                                       1.42e-09 ***
+Health:RegionCentral and Eastern Europe          0.999    
+Health:RegionEastern Asia                        0.893    
+Health:RegionLatin America and Caribbean         0.680    
+Health:RegionMiddle East and Northern Africa     0.645    
+Health:RegionNorth America                       0.684    
+Health:RegionSoutheastern Asia                   0.883    
+Health:RegionSouthern Asia                       0.899    
+Health:RegionSub-Saharan Africa                  0.928    
+Health:RegionWestern Europe                      0.552    
+Economy:RegionCentral and Eastern Europe         0.799    
+Economy:RegionEastern Asia                       0.722    
+Economy:RegionLatin America and Caribbean        0.748    
+Economy:RegionMiddle East and Northern Africa    0.725    
+Economy:RegionNorth America                      0.618    
+Economy:RegionSoutheastern Asia                  0.630    
+Economy:RegionSouthern Asia                      0.939    
+Economy:RegionSub-Saharan Africa                 0.926    
+Economy:RegionWestern Europe                     0.369    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.474 on 437 degrees of freedom
+Multiple R-squared:  0.8381,	Adjusted R-squared:  0.8262 
+F-statistic: 70.68 on 32 and 437 DF,  p-value: < 2.2e-16
+
+ [1] "addition.anova"                          
+ [2] "addition.model"                          
+ [3] "factors.cov"                             
+ [4] "factors.matrix"                          
+ [5] "full.model"                              
+ [6] "full.model.with.partial.region.effect"   
+ [7] "full.table"                              
+ [8] "happiness.all"                           
+ [9] "interation.anova"                        
+[10] "interation.model"                        
+[11] "model3"                                  
+[12] "pca.lm.model"                            
+[13] "pca.lm.model.with.region"                
+[14] "pca.model"                               
+[15] "pca.sum"                                 
+[16] "pca.table"                               
+[17] "reduced.model.no.generosity"             
+[18] "reduced.model.with.partial.region.effect"
+[19] "regionOnly.model"                        
+[20] "regionOnly.tukey"                        
+[21] "selected.table"                          
+full model, AIC:  792.2431  BIC:  825.465 
+reduced model, AIC:  793.059  BIC:  822.1281 
+full model with region interaction with all factors, AIC:  593.5767  BIC:  880.1153 
+full model with region interaction with health and economy, AIC:  663.8726  BIC:  809.2183 
+reduced model with region interaction with health and economy, AIC:  665.7833  BIC:  806.9762 
+pca model, AIC:  1108.676  BIC:  1133.593 
+pca model, AIC:  706.2503  BIC:  918.0396 
+ [1] "addition.anova"                          
+ [2] "addition.model"                          
+ [3] "factors.cov"                             
+ [4] "factors.matrix"                          
+ [5] "full.model"                              
+ [6] "full.model.with.partial.region.effect"   
+ [7] "full.table"                              
+ [8] "happiness.all"                           
+ [9] "interation.anova"                        
+[10] "interation.model"                        
+[11] "model3"                                  
+[12] "pca.lm.model"                            
+[13] "pca.lm.model.with.region"                
+[14] "pca.model"                               
+[15] "pca.sum"                                 
+[16] "pca.table"                               
+[17] "reduced.model.no.generosity"             
+[18] "reduced.model.with.partial.region.effect"
+[19] "regionOnly.model"                        
+[20] "regionOnly.tukey"                        
+[21] "selected.table"                          
+ [1] "addition.anova"                          
+ [2] "addition.model"                          
+ [3] "factors.cov"                             
+ [4] "factors.matrix"                          
+ [5] "full.model"                              
+ [6] "full.model.with.partial.region.effect"   
+ [7] "full.table"                              
+ [8] "happiness.all"                           
+ [9] "interation.anova"                        
+[10] "interation.model"                        
+[11] "model3"                                  
+[12] "pca.lm.model"                            
+[13] "pca.lm.model.with.region"                
+[14] "pca.model"                               
+[15] "pca.sum"                                 
+[16] "pca.table"                               
+[17] "reduced.model.no.generosity"             
+[18] "reduced.model.with.partial.region.effect"
+[19] "regionOnly.model"                        
+[20] "regionOnly.tukey"                        
+[21] "selected.table"                          
+[1] "h"

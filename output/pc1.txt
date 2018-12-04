@@ -1,0 +1,2 @@
+    Economy      Family      Health     Freedom       Trust  Generosity 
+-0.12536761 -0.04213843 -0.02279518  0.04786830  0.06326022  0.07917271 
