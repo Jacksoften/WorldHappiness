@@ -16,3 +16,5 @@ Regression <br/> Model Selection <br/> ANOVA <br/> PCA
 + We used AIC and BIC to test different models. Backward model selection tells us to keep all six variables (With AIC). BIC shows that generosity is not important. 
 + Since there are correlations between continuous factors. ANOVA table return wierd result dut to collinearity. (Need to read book and fix problem) 
 + We tried to use PCA to reduce the correlation between variables. It is hard to interpret the result. We found that PCA does not drop many variables for our data. We need to keep four out six principal components to get 95% variance.
++ The above PCA did not work very well, we think it is because the different scales of our data. Thus, we standardized data and did the pca again. We tried to keep 4 PCs in the model, but the PC3 and PC4 are not statistically significant. 
++ We added region factor to the model which contains two PCs. ANOVA table shows that Region has significance on the model. And both AIC and BIC dropped comparing to the previous models. Next, we need some plots to support our findings. And Tukey test to find which region has significant influnce on happiness score.  
