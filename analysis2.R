@@ -27,8 +27,8 @@ factors.matrix = as.matrix(data[,-c(1,2,3,4)])
 
 pca.decomp = prcomp(factors.matrix)
 pca.sum = summary(pca.decomp)
-p1 = barplot(pca.sum$importance[2,], ylim=c(0, 0.5), main='Proportion of Variance')
-p2 = barplot(pca.sum$importance[3,], ylim=c(0, 1), main='Cumulative Proportion')
+pca1 = barplot(pca.sum$importance[2,], ylim=c(0, 0.5), main='Proportion of Variance')
+pca2 = barplot(pca.sum$importance[3,], ylim=c(0, 1), main='Cumulative Proportion')
 
 # NOTE: taking four principal components
 pca.table = cbind(data[,c(2,3,4)], pca.decomp$x)

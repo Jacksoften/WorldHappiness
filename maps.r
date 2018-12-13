@@ -3,6 +3,7 @@ library(sp)
 library(maptools)
 data(wrld_simpl)
 
+data0 = read.csv('./data/modified_data.csv')
 data1 = read.table("./data/regrouped_data")
 regions = by(data1, data1$Region, function(x) wrld_simpl@data$NAME %in% x$Country)
 colors = c(gray(0.80), 'red')[regions[[1]] + 1]

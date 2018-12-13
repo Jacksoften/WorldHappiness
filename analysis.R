@@ -7,8 +7,8 @@
 # but region does have obvious effects.
 # We need two-way ANOVA to test it. 
 happiness.all = read.csv('./data/happiness_region_year.csv')
-interation.model = aov(score ~ year * Region, data = happiness.all)
-interation.anova = anova(interation.model)
+interaction.model = aov(score ~ year * Region, data = happiness.all)
+interaction.anova = anova(interaction.model)
 # The p-value is rounded to 1, so we can conclude there is no interaction effect
 # then we drop the interation term from the model
 addition.model = aov(score~year+Region, data=happiness.all)
@@ -17,6 +17,7 @@ addition.anova = anova(addition.model)
 # the p-value for Region is small, there is effect of region factor
 
 # Tukey pairwised comparisons
+levels(happiness.all$Region) = c("ANZ", "CEE", "EA", "LAC", "MNA", "NA", "SEA", "SA", "SSA", "WE")
 regionOnly.model = aov(score~Region, data=happiness.all)
 regionOnly.tukey = TukeyHSD(regionOnly.model)
 # We can see if the difference between any pair of regions is statistically significant.
@@ -129,3 +130,16 @@ cat("pca model, AIC: ", AIC(pca.lm.model1),
 pca.lm.model.with.region1 = lm(Score ~ PC1 * Region, data=pca.table)
 cat("pca model, AIC: ", AIC(pca.lm.model.with.region1), 
 	" BIC: ", BIC(pca.lm.model.with.region1), '\n')
+
+
+
+levels(selected.table$Region) = c("group1", "group2", "group2", "group2", "group2", "group1", "group2", "group3", "group3", "group1")
+
+p.n = ggplot(data=selected.table)
+p1.n = p.n + geom_boxplot(aes(Region, Economy))
+p2.n = p.n + geom_boxplot(aes(Region, Family))
+p3.n = p.n + geom_boxplot(aes(Region, Freedom))
+p4.n = p.n + geom_boxplot(aes(Region, Generosity))
+p5.n = p.n + geom_boxplot(aes(Region, Health))
+p6.n = p.n + geom_boxplot(aes(Region, Trust))
+pfin.n =  grid.arrange(p1.n, p2.n, p3.n, p4.n, p5.n, p6.n, nrow = 2)

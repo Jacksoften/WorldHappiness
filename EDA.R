@@ -76,24 +76,26 @@ happiness.all$Region = unlist(list(data1$Region, data2$Region, data3$Region))
 p7 = ggplot(data=happiness.all) + geom_boxplot(aes(x=Region, y=score, color=year))
 
 # interaction plots for two factors year and region
+
 pdf("./plots/interaction_Region.pdf")
-inter.region = interaction.plot(x.factor = happiness.all$year,
-								trace.factor=happiness.all$Region,
-								response = happiness.all$score, 
+with(happiness.all, interaction.plot(x.factor = year,
+								trace.factor= Region,
+								response = score, 
 								fun = mean, type = "b", legend = TRUE,
 								xlab = "year", ylab="happiness score",
-								pch=c(1,19),col=c("blue","red","purple","yellow","green","brown","pink","powderblue","orange","palegreen"))
+								pch=c(1,19),col=c("blue","red","purple","yellow","green","brown","pink","powderblue","orange","palegreen")),
+	 axis(1, at=1:10, labels=Region, las = 2, cex.axis = 0.8))
 dev.off()
 
 pdf("./plots/interaction_year.pdf")
-inter.year = interaction.plot(x.factor = happiness.all$Region,
-							  trace.factor=happiness.all$year,
-							  response = happiness.all$score,
+with(happiness.all, interaction.plot(x.factor = Region,
+							  trace.factor = year,
+							  response = score,
 							  fun = mean, type = "b", legend = TRUE,
 							  xlab = "Region", ylab="happiness score",
-							  pch=c(1,19),col=c("blue","red","green"))
+							  pch=c(1,19),col=c("blue","red","green")),
+	 axis(1, at=1:40, labels=categories, las = 2, cex.axis = 0.8))
 dev.off()
-
 # data modification
 # since there is no significant effect of year, we can combine three tables together
 # for later work for simplicity
