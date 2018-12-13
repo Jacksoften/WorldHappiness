@@ -1,0 +1,14 @@
+Single term deletions
+
+Model:
+Score ~ Economy + Family + Health + Freedom + Trust + Generosity
+           Df Sum of Sq    RSS     AIC F value    Pr(>F)    
+<none>                  143.51 -543.56                      
+Economy     1   24.9520 168.47 -470.22 80.4990 < 2.2e-16 ***
+Family      1   12.5422 156.06 -506.18 40.4631 4.817e-10 ***
+Health      1   15.2539 158.77 -498.08 49.2114 8.198e-12 ***
+Freedom     1   14.4376 157.95 -500.51 46.5779 2.769e-11 ***
+Trust       1    2.9714 146.49 -535.93  9.5862  0.002079 ** 
+Generosity  1    0.8624 144.38 -542.74  2.7822  0.095991 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
