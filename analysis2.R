@@ -11,18 +11,19 @@
 # ----------------------------------------------------
 # full.table = read.csv("./data/modified_data.csv")
 # # select only region factor and six target factors
-# selected.table = full.table[,-c(1,2,4,12)]
+# selected.table = full.table[,-c(1,4,12)]
 # # Rename columns for simplification
-# names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
+# names(selected.table) = c("Country", "Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
 #
-# normalized.data = data.frame(sapply(selected.table[,-1], function(x) x/sd(x)))
-# standardized.table = cbind(Region = selected.table[,1], normalized.data)
+# normalized.data = data.frame(sapply(selected.table[,-c(1,2)], function(x) {x / sd(x)}))
+# standardized.table = cbind(selected.table[,c(1,2)], normalized.data)
 # write.csv(standardized.table, './data/standardized_data.csv')
 # ----------------------------------------------------
 
+library(ggplot2)
 data = read.csv("./data/standardized_data.csv")
 levels(data$Region) = c("ANZ", "CEE", "EA", "LAC", "MNA", "NA", "SEA", "SA", "SSA", "WE")
-factors.matrix = as.matrix(data[,-c(1,2,3)])
+factors.matrix = as.matrix(data[,-c(1,2,3,4)])
 
 pca.decomp = prcomp(factors.matrix)
 pca.sum = summary(pca.decomp)
@@ -30,7 +31,7 @@ p1 = barplot(pca.sum$importance[2,], ylim=c(0, 0.5), main='Proportion of Varianc
 p2 = barplot(pca.sum$importance[3,], ylim=c(0, 1), main='Cumulative Proportion')
 
 # NOTE: taking four principal components
-pca.table = cbind(data[,c(2,3)], pca.decomp$x)
+pca.table = cbind(data[,c(2,3,4)], pca.decomp$x)
 pca.lm.model = lm(Score ~ PC1 + PC2 + PC3 + PC4, data=pca.table)
 cat("pca model, AIC: ", AIC(pca.lm.model),
      " BIC: ", BIC(pca.lm.model), '\n')
@@ -66,3 +67,27 @@ region.CIs.new = TukeyHSD(region.model.new)
 model.new1 = lm(Score ~ PC1 * Region, data=data.new)
 cat("new model1, AIC: ", AIC(model.new1),
 	" BIC: ", BIC(model.new1), '\n')
+
+model.new2 = lm(Score ~ PC1 + Region, data=data.new)
+cat("new model2, AIC: ", AIC(model.new2),
+	" BIC: ", BIC(model.new2), '\n')
+
+p = ggplot(data=data.new, aes(y=Score, x=PC1, color=Region)) + geom_point()
+p1 = p + geom_abline(intercept = model.new1$coefficient[1],
+				     slope = model.new1$coefficient[2], color = 'red') +
+		 geom_abline(intercept = model.new1$coefficient[1] + model.new1$coefficient[3], 
+					 slope = model.new1$coefficient[2] + model.new1$coefficient[5], color = 'green') + 
+		 geom_abline(intercept = model.new1$coefficient[1] + model.new1$coefficient[4], 
+					 slope = model.new1$coefficient[2] + model.new1$coefficient[6], color = 'blue')
+
+
+model.new3 = lm(Score ~ PC1 * Region + PC2, data=data.new)
+cat("new model 3, AIC: ", AIC(model.new3),
+     " BIC: ", BIC(model.new3), '\n')
+model.new4 = lm(Score ~ (PC1 + PC2) * Region, data=data.new)
+cat("new model 4, AIC: ", AIC(model.new4),
+     " BIC: ", BIC(model.new4), '\n')
+model.new5 = lm(Score ~ PC1 + PC2 + Region, data=data.new)
+cat("new model 5, AIC: ", AIC(model.new5),
+     " BIC: ", BIC(model.new5), '\n')
+
