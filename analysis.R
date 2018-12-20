@@ -25,8 +25,6 @@ regionOnly.tukey = TukeyHSD(regionOnly.model)
 full.table = read.csv("./data/modified_data.csv")
 # select only region factor and six target factors
 selected.table = full.table[,-c(1,2,4,12)]
-# Rename columns for simplification
-names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
 
 # NOTE: Should we check assumptions here? 
 #       It is actually a uneqaul sized two-way ANOVA

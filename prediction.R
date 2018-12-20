@@ -1,12 +1,8 @@
 # split data to training and testing sets. 
 
-
-
 df0 = read.table('./data/regrouped_data')
 df1 = read.csv('./data/modified_data.csv')
 df1 = df1[,-c(2,4,12)]
-# Rename columns for simplification
-names(df1) = c("Country", "Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
 
 
 set.seed(2018)

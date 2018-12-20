@@ -7,23 +7,15 @@
 # 3. Find the significant regions.
 # 4. Use developed and undeveloped countries.
 
-# NOTE: Comment out since data has been saved
-# ----------------------------------------------------
-# full.table = read.csv("./data/modified_data.csv")
-# # select only region factor and six target factors
-# selected.table = full.table[,-c(1,4,12)]
-# # Rename columns for simplification
-# names(selected.table) = c("Country", "Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
-#
-# normalized.data = data.frame(sapply(selected.table[,-c(1,2)], function(x) {x / sd(x)}))
-# standardized.table = cbind(selected.table[,c(1,2)], normalized.data)
-# write.csv(standardized.table, './data/standardized_data.csv')
-# ----------------------------------------------------
+full.table = read.csv("./data/modified_data.csv")
+
+normalized.data = data.frame(sapply(full.table[,c(5:11)], function(x) {x / sd(x)}))
+standardized.table = cbind(full.table[,c(2,3)], normalized.data)
+write.csv(standardized.table, './data/standardized_data.csv')
 
 library(ggplot2)
-data = read.csv("./data/standardized_data.csv")
-levels(data$Region) = c("ANZ", "CEE", "EA", "LAC", "MNA", "NA", "SEA", "SA", "SSA", "WE")
-factors.matrix = as.matrix(data[,-c(1,2,3,4)])
+levels(standardized.table$Region) = c("ANZ", "CEE", "EA", "LAC", "MNA", "NA", "SEA", "SA", "SSA", "WE")
+factors.matrix = as.matrix(standardized.table[,-c(1,2,3)])
 
 pca.decomp = prcomp(factors.matrix)
 pca.sum = summary(pca.decomp)
@@ -31,7 +23,7 @@ pca1 = barplot(pca.sum$importance[2,], ylim=c(0, 0.5), main='Proportion of Varia
 pca2 = barplot(pca.sum$importance[3,], ylim=c(0, 1), main='Cumulative Proportion')
 
 # NOTE: taking four principal components
-pca.table = cbind(data[,c(2,3,4)], pca.decomp$x)
+pca.table = cbind(standardized.table[,c(1,2,3)], pca.decomp$x)
 pca.lm.model = lm(Score ~ PC1 + PC2 + PC3 + PC4, data=pca.table)
 cat("pca model, AIC: ", AIC(pca.lm.model),
      " BIC: ", BIC(pca.lm.model), '\n')
@@ -48,7 +40,7 @@ pca.lm.model3 = lm(Score ~ PC1 * Region + PC2, data=pca.table)
 cat("pca model3, AIC: ", AIC(pca.lm.model3),
      " BIC: ", BIC(pca.lm.model3), '\n')
 
-region.model = aov(Score ~ Region, data = data)
+region.model = aov(Score ~ Region, data = standardized.table)
 region.CIs = TukeyHSD(region.model)
 print(which(region.CIs$Region[,4] > 0.05))
 # NOTE:

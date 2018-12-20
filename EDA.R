@@ -106,12 +106,14 @@ data1new = data1[, !names(data1) %in% variation.names]
 data2new = data2[, !names(data2) %in% variation.names]
 data3new = data3[, !names(data3) %in% variation.names]
 full.table = rbind(data1new, data2new, data3new)
+names(full.table) = c("Country", "Region", "Rank", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity", "Dystopia.Residual")
 # full table is saved to modified data for analysis
+write.csv(full.table, "./data/modified_data.csv")
+
 
 # select only region factor and six target factors
 selected.table = full.table[,c(2,4,5,6,7,8,9,10)]
 # Rename columns for simplification
-names(selected.table) = c("Region", "Score", "Economy", "Family", "Health", "Freedom", "Trust", "Generosity")
 library(GGally)
 # p8 = ggpairs(selected.table)
 # p8 = pairs(selected.table)
